@@ -1,0 +1,15 @@
+# @package _global_
+model:
+  _target_: src.model.lightning.VCEPLightning
+  model:
+    hidden_dim: 32
+    eps: false
+  train:
+    optimizer:
+      lr: 0.001 
+      weight_decay: 1e-4
+      beta1: 0.9
+      beta2: 0.999
+    scheduler:
+      factor: 0.1
+      patience: 10

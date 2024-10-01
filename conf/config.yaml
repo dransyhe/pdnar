@@ -1,0 +1,30 @@
+# specify here default training configuration
+defaults:
+  - _self_
+  - pl_trainer: default.yaml
+  - model: model.yaml
+  - data: data.yaml
+  - wandb: wandb.yaml
+  - callbacks: null # set this to null if you don't want to use callbacks
+
+  - experiment: null
+
+  - hydra: default.yaml
+
+  - hparams_search: null
+
+  - test: null
+
+
+work_dir: ${hydra:runtime.cwd}
+data_dir: ${work_dir}/data/
+model_dir: ${work_dir}/checkpoints/
+
+debug: False
+
+seed: 0
+cuda: True
+wandb_use: False
+model_save_name: 'primal-dual'
+checkpoint: null
+inference_only: False 
