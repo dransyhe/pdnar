@@ -286,7 +286,6 @@ class GraphNeuralExecutor(nn.Module):
 
         # Corrective stage with greedy algorithm if the output is not valid 
         if torch.any(pred_y_mask):
-            print(f"Not a valid solution with {torch.sum(pred_y_mask)} sets remaining")
             while torch.any(pred_y_mask):
                 pred_x_mask = (1 - pred_set).bool()
                 edge_mask = (pred_x_mask[edge_index[1]] & pred_y_mask[edge_index[0]]).squeeze(-1)

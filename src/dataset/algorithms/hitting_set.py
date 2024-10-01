@@ -88,7 +88,7 @@ def hitting_set(graph):
                 delta[k] = 0.
 
         # Get the index of element that meets the constraint (and to add into A)
-        for e in range(num_elements): # TODO: tie breaking; currently finds the first min
+        for e in range(num_elements): 
             if degree_e[e] != 0:
                 if abs(remain_ce[e] / degree_e[e] - eps) < 1e-10:
                     l = e 
@@ -148,7 +148,6 @@ def hitting_set(graph):
         all_y_mask.append(all_y_mask[-1])
 
     # Dimension transformation
-    # Here, timestep = num_nodes is set to the maximum value (maximally is num_elements, but it differs across graphs)
     x = torch.tensor(all_x).transpose(0, 1).unsqueeze(-1)  # x = (num_elements, timesteps, 1)
     y = torch.tensor(all_y).transpose(0, 1).unsqueeze(-1)  # y = (num_sets, timesteps, 1)
     V = torch.tensor(all_V).transpose(0, 1).unsqueeze(-1)  # V = (num_sets, timesteps, 1)

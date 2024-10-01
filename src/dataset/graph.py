@@ -11,8 +11,7 @@ def generate_bipartite_graphs(num_graphs, num_nodes):
     for _ in range(num_graphs):
         while True: 
             # Sample LHS and RHS nodes 
-            right_num_nodes = random.randint(2, num_nodes - 2)
-            # right_num_nodes = num_nodes // 2   
+            right_num_nodes = random.randint(2, num_nodes - 2)  
             right_nodes = [i for i in range(right_num_nodes)]
             left_nodes = [right_num_nodes + i for i in range(num_nodes - right_num_nodes)]
 
@@ -58,8 +57,6 @@ def generate_bipartite_graphs_from_barabasi(num_graphs, num_nodes):
 def generate_test_graphs(graph_type, num_graphs, num_nodes):
     if graph_type == 'erdos':
         return generate_bipartite_graphs_from_erdos(num_graphs, num_nodes)
-    elif graph_type == 'barabasi':
-        return generate_bipartite_graphs_from_barabasi(num_graphs, num_nodes)
     elif graph_type == 'star':
         return generate_star_graph(num_graphs, num_nodes)
     elif graph_type == 'lobster':

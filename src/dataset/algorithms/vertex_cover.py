@@ -88,7 +88,6 @@ def vertex_cover(graph):
 
     # Use a time_mask to fill up for a maximal timesteps
     timesteps = len(all_delta)
-    # to_add = num_bipartite_nodes - timesteps
     to_add = num_nodes - timesteps 
     assert to_add >= 0
     for _ in range(to_add):
@@ -97,15 +96,7 @@ def vertex_cover(graph):
         all_node_mask.append(all_node_mask[-1])
         all_edge_mask.append(all_edge_mask[-1])
 
-    # Fill up optimal vertex covers to num_solutions 
-    # num_solutions = len(optimal_vertex_covers)
-    # optimal_mask = [torch.ones(num_nodes, dtype=torch.bool) for _ in range(num_solutions)]
-    # for _ in range(10 - num_solutions):
-    #     optimal_vertex_covers.append(optimal_vertex_covers[-1].clone())
-    #     optimal_mask.append(torch.zeros(num_nodes, dtype=torch.bool))
-
     # Dimension transformation
-    # Here, timestep = num_nodes * num_nodes is set to the maximum value
     delta = torch.tensor(all_delta).transpose(0, 1).unsqueeze(-1)  # delta = (num_edges, timesteps, 1)
     w_p = torch.tensor(all_w_p).transpose(0, 1).unsqueeze(-1)  # w_p = (num_nodes, timesteps, 1)
     node_mask = torch.tensor(all_node_mask).transpose(0, 1).unsqueeze(-1)  # node_mask = (num_nodes, timesteps)

@@ -47,14 +47,6 @@ class ParallelAlgData(L.LightningDataModule):
             generate_algorithmic_data = set_cover
             generate_graphs = generate_bipartite_graphs
             graph_type = 'hypergraph' 
-        elif self.algorithm == 'vertex_cover_uniform':
-            generate_algorithmic_data = hitting_set
-            generate_graphs = generate_ordinary_bipartite_graphs
-            graph_type = 'ordinary'
-        elif self.algorithm == 'set_cover_uniform':
-            generate_algorithmic_data = hitting_set
-            generate_graphs = generate_bipartite_graphs
-            graph_type = 'hypergraph'
         else:
             raise NotImplementedError(f"Algorithm {self.algorithm} is not implemented.") 
 
