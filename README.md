@@ -21,21 +21,21 @@ To run the experiments for the three NP-hard problems, use the following command
 
 1. **Minimum Vertex Cover (MVC)**
 
-  ```
-  python main.py data.algorithm="vertex_cover"
-  ```
+    ```bash
+    python main.py data.algorithm="vertex_cover"
+    ```
 
 2. **Minimum Set Cover (MSC)**
 
-  ```
-  python main.py data.algorithm="set_cover"
-  ```
+    ```bash
+    python main.py data.algorithm="set_cover"
+    ```
 
 3. **Minimum Hitting Set (MHS)** 
 
-  ```
-  python main.py data.algorithm="hitting_set" model.model.eps=True 
-  ```
+    ```bash
+    python main.py data.algorithm="hitting_set" model.model.eps=True 
+    ```
 
 - Note that  `model.model.eps` controls whether the uniform increase rule in used.
 
