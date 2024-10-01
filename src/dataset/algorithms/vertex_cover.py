@@ -8,7 +8,7 @@ from src.dataset.data import BipartiteData
 from src.dataset.algorithms.vertex_cover_solver import compute_from_nxgraph
 
 
-def vertex_cover(graph, eps=0.1):  
+def vertex_cover(graph):  
     B = copy.deepcopy(graph) 
 
     # Get optimal vertex covers 
@@ -68,7 +68,7 @@ def vertex_cover(graph, eps=0.1):
                 if edge_mask[e - num_nodes]:
                     sum += delta[e - num_nodes]
             w_p[n] -= sum
-            if w_p[n] <= eps * weights[n]:
+            if w_p[n] <= weights[n] * 0.1:
                 del_nodes.append(n)
 
         # Remove nodes and their incident edges
