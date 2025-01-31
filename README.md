@@ -12,7 +12,7 @@
 2. Activate the environment:
 
     ```bash
-    conda activate pdgnn
+    conda activate pdnar
     ```
 
 ### Usage 
