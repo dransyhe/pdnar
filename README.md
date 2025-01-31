@@ -1,4 +1,4 @@
-# Primal-Dual Graph Neural Networks for General NP-Hard Combinatorial Optimization
+# Primal-Dual Neural Algorithmic Reasoning
 
 
 ### Installation
