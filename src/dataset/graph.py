@@ -5,37 +5,6 @@ import random
 from itertools import combinations
 
 
-def generate_bipartite_graphs(num_graphs, num_nodes):
-    graphs = []
-
-    for _ in range(num_graphs):
-        while True: 
-            # Sample LHS and RHS nodes 
-            right_num_nodes = random.randint(2, num_nodes - 2)  
-            right_nodes = [i for i in range(right_num_nodes)]
-            left_nodes = [right_num_nodes + i for i in range(num_nodes - right_num_nodes)]
-
-            # Construct bipartite graph by randomly connecting LHS and RHS
-            B = nx.Graph()
-            B.add_nodes_from(left_nodes, bipartite=0)
-            B.add_nodes_from(right_nodes, bipartite=1)
-            edges = [(u, v) for u in left_nodes for v in right_nodes if random.random() > 0.8]
-            B.add_edges_from(edges)
-
-            # Check if connected (i.e. no isolated node)
-            if nx.is_connected(B):
-                break 
-
-        # Assign random weights to RHS nodes 
-        node_weight = []
-        for v in right_nodes:
-            node_weight += [random.uniform(1e-10, 1)] # [random.randint(1, 10)]  
-        B.graph['weights'] = node_weight
-        
-        graphs.append(B)
-
-    return graphs
-
 
 def generate_bipartite_graphs_from_barabasi(num_graphs, num_nodes):
     graphs = []
@@ -52,6 +21,37 @@ def generate_bipartite_graphs_from_barabasi(num_graphs, num_nodes):
         graphs.append(B)
     return graphs
 
+
+def generate_bipartite_graphs(num_graphs, num_nodes, b=5):
+    graphs = []
+    for _ in range(num_graphs):
+        B = nx.Graph()
+        n = max(3, random.randint(num_nodes // 4, num_nodes // 4 * 3))
+        m = num_nodes - n 
+        offline_nodes = range(n)
+        B.add_nodes_from(offline_nodes, bipartite=1)  
+        
+        def degree_probability(node, B):
+            return B.degree(node) + 1  # Add 1 to avoid division by zero 
+        
+        for online_node in range(n, n + m):
+            B.add_node(online_node, bipartite=0)  
+            
+            offline_probabilities = [degree_probability(node, B) for node in offline_nodes]
+            total_prob = sum(offline_probabilities)
+            probabilities = [prob / total_prob for prob in offline_probabilities]
+            selected_offline_nodes = random.choices(offline_nodes, probabilities, k=b)
+            
+            B.add_edges_from((online_node, offline_node) for offline_node in selected_offline_nodes)
+
+        node_weight = []
+        for _ in range(n):
+            node_weight += [random.uniform(1e-10, 1)]
+        B.graph['weights'] = node_weight
+
+        graphs.append(B)
+
+    return graphs
 
 
 def generate_test_graphs(graph_type, num_graphs, num_nodes):

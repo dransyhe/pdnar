@@ -72,7 +72,7 @@ def set_cover(graph):
                 if edge_mask[e - num_nodes]:
                     sum += delta[e - num_nodes]
             w_p[n] -= sum
-            if w_p[n] <= weights[n] * 0.01:
+            if w_p[n] <= weights[n] * 0.1:
                 del_nodes.append(n)
 
         # Remove nodes and their incident edges
